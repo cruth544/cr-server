@@ -1,7 +1,7 @@
 FROM golang:latest
 
 RUN mkdir /app
-ADD /src/. /app/
+ADD . /app/
 WORKDIR /app
 
 # RUN go mod download

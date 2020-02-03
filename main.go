@@ -1,10 +1,10 @@
 package main
 
 import (
-	"database/sql"
+	db "db"
 	"fmt"
-	"k8s.io/kubernetes/pkg/kubelet/configmap"
 	"net/http"
+	"os"
 	"strings"
 )
 
@@ -16,7 +16,11 @@ func sayHello(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	fmt.Printf("Running on port 8080")
+	fmt.Printf("Running on port 8080\n")
+	fmt.Printf("DB Name: ")
+	fmt.Printf(os.Getenv("POSTGRES_DB"))
+	fmt.Printf("\n")
+	dbConnect()
 	http.HandleFunc("/", sayHello)
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		panic(err)
